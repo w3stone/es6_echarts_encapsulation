@@ -1,0 +1,56 @@
+{
+    "result": 1,
+    "msg": "",
+    "data": {
+        "title": "pie01",
+        "chartdata": [
+        {
+            "x": null,
+            "y": null,
+            "xc": null,
+            "yc": null,
+            "value": 479850.0,
+            "name": "2013"
+        },
+        {
+            "x": null,
+            "y": null,
+            "xc": null,
+            "yc": null,
+            "value": 585730.0,
+            "name": "2014"
+        },
+        {
+            "x": null,
+            "y": null,
+            "xc": null,
+            "yc": null,
+            "value": 587390.0,
+            "name": "2015"
+        },
+        {
+            "x": null,
+            "y": null,
+            "xc": null,
+            "yc": null,
+            "value": 607060.0,
+            "name": "2016"
+        },
+        {
+            "x": null,
+            "y": null,
+            "xc": null,
+            "yc": null,
+            "value": 583620.0,
+            "name": "2017"
+        },
+        {
+            "x": null,
+            "y": null,
+            "xc": null,
+            "yc": null,
+            "value": 12260.0,
+            "name": "2018"
+        }]
+    }
+}
