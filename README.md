@@ -1,6 +1,3 @@
-# suvalue
-
-> a Vue.js project by suvalue
 
 ## Build Setup
 
@@ -18,4 +15,18 @@ npm run build
 npm run build --report
 ```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+# 数据格式(Data Format)
+data:{
+	"chartData": [ //主要数据
+		{"x":"", "y":"", "value":0, "name":""},
+		{"x":"", "y":"", "value":0, "name":""},
+		......
+	],
+    title:"", //标题
+	chartType: 0, //图表模板id
+    xTitle: "", //x轴标题
+    yTitle: "", //y轴标题
+    xUnit: "", //x轴单位
+    yUnit: "", //y轴单位
+    vUnit: "", //value轴单位   
+}
