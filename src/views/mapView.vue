@@ -12,11 +12,8 @@
         name: "mapView",
         data (){
             return{
-                randomTime: Math.random()*500+500
+                
             }
-        },
-        methods:{
-            
         },
         mounted(){
             //普通柱状图

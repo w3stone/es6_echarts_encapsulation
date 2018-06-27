@@ -9,8 +9,11 @@ let defaultConfig = {
     },
     //饼图配置项
     pieConfig: {
-        innerRadius: '', //内圈半径
-        outerRadius: '' //外圈半径
+        innerRadius: '0', //内圈半径
+        outerRadius: '60%', //外圈半径
+        pieLabelShow: true, //饼图数据显示
+        xCenter: '50%', //
+        yCenter: '60%' //
     },
     //散点图配置项
     scatterConfig:{
