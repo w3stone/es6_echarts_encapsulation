@@ -42,7 +42,6 @@
 
 <style lang="scss" type="test/css">
     .pieView{
-        overflow-y: auto;
         width:100%;
         height:100%;
     }

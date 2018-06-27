@@ -65,7 +65,7 @@
             }
         },
         mounted(){
-            console.log(this.option);
+            //console.log(this.option);
             if(this.data.chartData && this.finalChartId && this.finalChartType){
                 //this.drawChart(); //绘制图表 
             }

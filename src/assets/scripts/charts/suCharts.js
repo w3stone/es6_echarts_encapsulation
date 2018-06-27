@@ -50,7 +50,7 @@ class SuCharts{
                 break;
             case 106: //普通散点图
                 this.chartObj = new ScatterChart(this.data);
-                option = this.chartObj.scatter();
+                option = this.chartObj.scatter(config.scatterConfig);
                 break;
             case 113: //柱状图动态求和
                 this.chartObj = new BarChart(this.data);
@@ -135,15 +135,6 @@ function addTitle(chartTitle){
         top: 10
     };
     return title;
-}
-
-//添加图例组件
-function addLegend(legendData){
-    let legend = {
-        data: legendData,
-        type: 'scroll',
-        top: '6%'
-    };
 }
 
 //添加toolbox

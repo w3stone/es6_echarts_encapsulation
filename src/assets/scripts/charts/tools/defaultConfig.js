@@ -11,6 +11,10 @@ let defaultConfig = {
     pieConfig: {
         innerRadius: '', //内圈半径
         outerRadius: '' //外圈半径
+    },
+    //散点图配置项
+    scatterConfig:{
+        symbolSize: 30 //默认散点大小
     }
     
 }

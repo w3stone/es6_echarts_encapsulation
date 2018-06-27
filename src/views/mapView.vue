@@ -22,8 +22,8 @@
             //普通柱状图
             dataGet("mapData", (data)=>{
                 data.title = "地图99";
-                var chart = new SuCharts(data, "map01");
-                chart.drawChart(99); //二级图表重绘
+                var chart = new SuCharts(data, "map01", 99);
+                chart.drawChart(); //二级图表重绘
             });
 
         }
@@ -33,7 +33,6 @@
 
 <style lang="scss" type="test/css">
     .mapView{
-        overflow-y: auto;
         width:100%;
         height:100%;
     }

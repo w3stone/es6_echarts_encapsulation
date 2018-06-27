@@ -2,14 +2,18 @@
 import {BaseChart} from './baseChart.js'
 
 class ScatterChart extends BaseChart {
+
+    constructor(data){
+        super(data);
+    }
     
-    //散点图(占比)
-    scatter(){
+    //散点图
+    scatter(scatterConfig){
         var legenddata = [];
         var seriesData = [];
 
         var sourceData = this.chartData;
-        var max = Enumerable.From(this.chartData).Select('$.value').Max(); //value最大值
+        var max = Enumerable.From(sourceData).Select('$.value').Max(); //value最大值
 
         //拼接数据
         sourceData.forEach(function(item,index){
@@ -62,7 +66,7 @@ class ScatterChart extends BaseChart {
                                 fontSize: 14
                             }
                         },
-                        symbolSize: (item.value/max).toFixed(2)*60
+                        symbolSize: max? (item.value/max).toFixed(2)*50 :scatterConfig.symbolSize //散点大小
                     }]
                 } 
                 seriesData.push(bs);
@@ -93,7 +97,7 @@ class ScatterChart extends BaseChart {
                         width: 1
                     },
                 },
-                formatter: function(obj) {
+                formatter: (obj)=> {
                     if (obj.componentType == "series") {
                         return '<div style="border-bottom: 1px solid rgba(255,255,255,.3); font-size: 18px;padding-bottom: 7px;margin-bottom: 7px">' +
                             obj.name + '</div>' +
@@ -162,6 +166,8 @@ class ScatterChart extends BaseChart {
             },
             series: seriesData
         };
+
+        console.log(option);
 
         return option;
     }
