@@ -5,8 +5,8 @@
 </template>
 
 <script>
-    import {SuCharts} from '@/components/charts/suCharts.js'
-    import {makeChart, dataGet} from '@/components/tools/fun.js' //全局函数
+    import {SuCharts} from '@/assets/scripts/charts/suCharts.js'
+    import {makeChart, dataGet} from '@/assets/scripts/tools/fun.js' //全局函数
 
 	export default {
         name: "mapView",

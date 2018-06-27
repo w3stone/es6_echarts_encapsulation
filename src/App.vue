@@ -64,6 +64,9 @@ export default {
         border: none;
         outline: none;
     }
+    .inner{
+        margin: 0 auto;
+    }
     .center{
         position: absolute;
         margin: auto;

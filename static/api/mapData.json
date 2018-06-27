@@ -3,7 +3,7 @@
     "msg": "",
     "data": {
       "title": "map01",
-      "chartdata": [
+      "chartData": [
             { "name": "四川", "value": 2 }, 
             { "name": "宁夏", "value": 1 }, 
             { "name": "广东", "value": 28 }, 

@@ -6,6 +6,8 @@ import pieView from '@/views/pieView'
 import lineView from '@/views/lineView'
 import scatterView from '@/views/scatterView'
 import mapView from '@/views/mapView'
+import specialView from '@/views/specialView'
+
 
 Vue.use(Router)
 
@@ -22,6 +24,7 @@ export default new Router({
         {path:"/line", component: lineView},
         {path:"/scatter", component: scatterView},
         {path:"/map", component: mapView},
+        {path:"/special", component: specialView}
       ]
     }
   ]

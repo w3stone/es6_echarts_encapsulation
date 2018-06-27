@@ -7,7 +7,7 @@ class MapChart extends BaseChart{
     map(){
         var seriesData = [];
 
-        this.list.forEach((item, index) => {
+        this.chartData.forEach((item, index) => {
             var d = {
                 name: item.name, value: item.value,
                 itemStyle: {

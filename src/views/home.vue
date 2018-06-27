@@ -35,31 +35,29 @@
     .homeIndex{
         width:100%;
         height:100%;
-    }
 
-    .main_content{
-        position: relative;
-        box-sizing: border-box;
-        width: 100%;
-        height: 100%;
-        padding-top: 60px;
-        background: #fff;
-        overflow-x: hidden;
-        overflow-y: auto;
-
-        .main{
-            float: left;
-            width: calc(100% - 100px);
-            height: 100%;
-            overflow: hidden;
-        }
-
-        p{
-            float: left;
+        .main_content{
+            position: relative;
             box-sizing: border-box;
-            border: 1px solid #ededed;
-            margin: 20px 2%;
+            width: 100%;
+            height: 100%;
+            padding-top: 60px;
+            background: #fff;
+            overflow-x: hidden;
+            overflow-y: auto;
+
+            .main{
+                box-sizing: border-box;
+                float: left;
+                width: calc(100% - 100px);
+                height: 100%;
+                padding: 20px;
+                overflow-x: hidden;
+                overflow-y: auto;
+            }
+            
         }
         
     }
+    
 </style>

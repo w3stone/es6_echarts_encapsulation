@@ -1,5 +1,6 @@
 /**柱状图封装**/
 import {BaseChart} from './baseChart.js'
+import {makeBarData} from '../tools/makeData.js'
 
 class BarChart extends BaseChart {
     
@@ -10,39 +11,16 @@ class BarChart extends BaseChart {
         this.vdata = [];
     }
 
-    //拼柱状图格式(xdata, ydata, vdata)
-    makeBarData(need2Per) {
-        if (need2Per != true)
-            need2Per=false;
-
-        var xdata = Enumerable.From(this.list).Select('$.x').Distinct().OrderBy().ToArray(); 
-        var ydata = Enumerable.From(this.list).Select('$.y').Distinct().ToArray();
-        var vdata = [];
-
-        ydata.forEach((valy)=>{
-            var arr = [];
-            var sum = 0;
-            xdata.forEach((valx)=>{
-                if(need2Per){ //转换成百分比
-                    var sum = Enumerable.From(this.list).Where('$.x=="' + valx+ '"').Sum('$.value');
-                    arr.push( (Enumerable.From(this.list).Where('$.x=="' + valx + '"&$.y=="' + valy+'"').Sum('$.value')/sum*100).toFixed(2) );
-                }else{
-                    arr.push( Enumerable.From(this.list).Where('$.x=="' + valx + '"&$.y=="' + valy+'"').Sum('$.value') );
-                }
-                
-            });
-            vdata.push(arr);
-        });
-
-        this.xdata = xdata;
-        this.ydata = ydata;
-        this.vdata = vdata;
-
-        return this;
+    _init(need2Per){
+        let workedData = makeBarData(this.chartData, need2Per);
+        this.xdata = workedData.xdata;
+        this.ydata = workedData.ydata;
+        this.vdata = workedData.vdata;
     }
 
     //普通柱状图
-    bar(){
+    bar(barConfig){
+        this._init();
         let series = [];
 
         //设置series配置项
@@ -52,7 +30,7 @@ class BarChart extends BaseChart {
                 type: 'bar',
                 itemStyle: {normal: {}},
                 data: val,
-                barWidth: '18%',
+                //barWidth: barConfig.barWidth || '18%',
                 label: {
                     normal: {
                         show: true,
@@ -64,7 +42,6 @@ class BarChart extends BaseChart {
         });
         
         let option = {
-            title:{text: this.title, right:'center'},
             legend: {
                 data: this.ydata, type:'scroll', top:'8%'
             },
@@ -109,22 +86,23 @@ class BarChart extends BaseChart {
     }
 
     //柱状图百分比(y轴和为100%)
-    barPercent(){
+    barPercent(barConfig){
+        this._init(true);
         let legenddata = this.ydata;
-        let legshow=legenddata.length<=20;
         let series = [];
         
         this.vdata.forEach((val, index)=>{
-            var bs = {
+            let bs = {
                 name: this.ydata[index],
                 type: 'bar',
                 stack:'堆积',
                 data: val,
-                barWidth: '40%',
+                barWidth: barConfig.barWidth || '40%',
                 label:{
                     normal:{
                         show: true,
                         postion: 'inside',
+                        formatter: '{c} %'
                     }	
                 }
             };
@@ -133,7 +111,6 @@ class BarChart extends BaseChart {
         });
         
         let option = {
-            title:{text:this.title, right:'center'},
             legend: {
                 data: legenddata,
                 type:'scroll',
@@ -145,8 +122,8 @@ class BarChart extends BaseChart {
                     type: 'shadow'     
                 },
                 formatter:function(p){
-                    var res="";
-                    for(var i=0;i<p.length;i++){
+                    let res="";
+                    for(let i=0;i<p.length;i++){
                         if(p[i].value>0){
                             res+=p[i].seriesName+':'+p[i].value+'%</br>';
                         }
@@ -183,7 +160,8 @@ class BarChart extends BaseChart {
     }
 
     //柱状图+增长率
-    barWithLine(){
+    barWithLine(barConfig){
+        this._init();
         let xdata = this.xdata;
         let ydata = [];
         let vdata = [];
@@ -212,17 +190,17 @@ class BarChart extends BaseChart {
 
         vdata.forEach((val, index)=>{
             if(!index%2){ //柱图
-                var bs = {
+                let bs = {
                     name: ydata[index],
                     type: 'bar',
                     data: val,
                     itemStyle:{normal:{color:''}},
                     label: {normal: {show: true,position: 'top'}},
-                    barWidth:'30%'
+                    barWidth: barConfig.barWidth || '30%'
                 };
                 series.push(bs);
             }else{ //增长率
-                var rs = {
+                let rs = {
                     name: ydata[index],
                     type: 'line',
                     itemStyle:{normal:{color:''}},
@@ -235,7 +213,6 @@ class BarChart extends BaseChart {
         });
 
         let option = {
-            title:{text: this.title, right:'center'},
             legend: {
                 data: ydata,
                 type:'scroll',
@@ -265,7 +242,8 @@ class BarChart extends BaseChart {
                     name: this.yAxis,
                     type: 'value',
                     axisLine:{lineStyle:{color:'#000'}},
-                    axisLabel: {textStyle:{color:'#000'},
+                    axisLabel: {
+                        textStyle:{color:'#000'},
                         formatter: (value)=>{
                             return this.setUnit(value);
                         },
@@ -278,14 +256,6 @@ class BarChart extends BaseChart {
                     axisLabel: {textStyle:{color:'#000'}}
                 }
             ], 
-            // dataZoom: [{
-            //     show: true,
-            //     height: 30,
-            //     bottom: 10,
-            //     start: 0,
-            //     end: 100,
-            //     handleSize: '110%',
-            // }, {type: 'inside'}],
             series: series
         };
 
@@ -293,7 +263,8 @@ class BarChart extends BaseChart {
     }
 
     //各类占比柱状图(动态求和)
-    barDynamic(chart){
+    barDynamic(chart, barConfig){
+        this._init();
         let selected = {};
         let series = [];
         let legenddata = this.ydata;
@@ -317,7 +288,7 @@ class BarChart extends BaseChart {
                 smooth: true,
                 areaStyle: {normal: {}},
                 data: val,
-                barWidth: '40%',
+                barWidth: barConfig.barWidth || '40%',
                 stack: '总量'
             };
             series.push(bs);
@@ -353,7 +324,6 @@ class BarChart extends BaseChart {
         series.push(config);
 
         let option = {
-            title:{text: this.title, right:'center'},
             tooltip: {
                 trigger: 'axis',
                 axisPointer: {

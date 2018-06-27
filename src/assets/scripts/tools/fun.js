@@ -71,7 +71,13 @@ function makePieChart(arrlist, need2Per) {
 
 //ajaxGet封装
 function dataGet(apiName, params, callback){
-    var url = "/static/api/" + apiName + ".json";
+    var url;
+
+    if(apiName.indexOf("http")>-1 || apiName.indexOf("https")>-1){
+        url = apiName;
+    }else{
+        url = "/static/api/" + apiName + ".json";
+    }
 
     if (typeof arguments[1] == "function"){
         callback = arguments[1];

@@ -25,6 +25,10 @@
                 <i class="el-icon-setting"></i>
                 <span slot="title">地图</span>
             </el-menu-item>
+            <el-menu-item index="/special">
+                <i class="el-icon-setting"></i>
+                <span slot="title">特殊图</span>
+            </el-menu-item>
             <!-- <el-menu-item index="/line">
                 <i class="el-icon-setting"></i>
                 <span slot="title">折线图</span>

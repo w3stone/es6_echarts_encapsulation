@@ -3,7 +3,8 @@
   "msg": "",
   "data": {
     "title": "bar01",
-    "chartdata": [
+    "chartType": 101,
+    "chartData": [
       {
         "x": "2013",
         "y": "住院",

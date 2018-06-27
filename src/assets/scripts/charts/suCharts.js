@@ -1,8 +1,11 @@
-import {BarChart} from "./bar.js";
-import {PieChart} from "./pie.js";
-import {LineChart} from "./line.js";
-import {ScatterChart} from "./scatter.js";
-import {MapChart} from "./map.js";
+import {BarChart} from "./baseCharts/bar.js";
+import {PieChart} from "./baseCharts/pie.js";
+import {LineChart} from "./baseCharts/line.js";
+import {ScatterChart} from "./baseCharts/scatter.js";
+import {MapChart} from "./baseCharts/map.js";
+import {SpecialChart} from "./baseCharts/special.js";
+import {defaultConfig} from "./tools/defaultConfig.js"
+
 
 class SuCharts{
     /**
@@ -15,68 +18,96 @@ class SuCharts{
      * }
      * **/
     //构建器
-    constructor(data, panelId){
+    constructor(data, panelId, chartType){
         this.data = data; //传入数据
         this.panelId = panelId; //dom节点id名
-        this.chart = {}; //echarts对象
+        this.chartType = chartType; //图表类型
+        this.echart = {}; //创建的echarts对象
+        this.chartObj = {}; //含data中的数据，及xdata, ydata, vdata等处理过的数据...
     }
 
-    //初始化echarts实例
-    drawChart(type, ifDataZoom){
-        this.chart = echarts.init(document.getElementById(this.panelId), "macarons");
-        
-        let nchart = {};
-        let option = {}; //option对象
+    //设置option
+    setOption(config){
+        let option = {}; //option配置对象
+        config = config? $.extend({}, defaultConfig, config): defaultConfig; //对象合并
 
-        switch (type){
+        switch (this.chartType){
             case 99: //地图
-                nchart = new MapChart(this.data);
-                option = nchart.map();
+                this.chartObj = new MapChart(this.data);
+                option = this.chartObj.map();
                 break;
             case 100: //柱状图+增长率
-                nchart = new BarChart(this.data);
-                option = nchart.makeBarData().barWithLine();
+                this.chartObj = new BarChart(this.data);
+                option = this.chartObj.barWithLine(config.barConfig);
                 break;
             case 101: //柱状图普通
-                nchart = new BarChart(this.data);
-                option = nchart.makeBarData().bar();
+                this.chartObj = new BarChart(this.data);
+                option = this.chartObj.bar(config.barConfig);
                 break;
             case 105: //柱状图百分比
-                nchart = new BarChart(this.data);
-                option = nchart.makeBarData(true).barPercent();
+                this.chartObj = new BarChart(this.data);
+                option = this.chartObj.barPercent(config.barConfig);
                 break;
             case 106: //普通散点图
-                nchart = new ScatterChart(this.data);
-                option = nchart.scatter();
+                this.chartObj = new ScatterChart(this.data);
+                option = this.chartObj.scatter();
                 break;
             case 113: //柱状图动态求和
-                nchart = new BarChart(this.data);
-                option = nchart.makeBarData().barDynamic(this.chart);
+                this.chartObj = new BarChart(this.data);
+                option = this.chartObj.barDynamic(this.echart, config.barConfig);
                 break;
             case 12: //折线图普通
                 nchart = new LineChart(this.data);
                 option = nchart.line();
                 break;
             case 104: //饼图
-                nchart = new PieChart(this.data);
-                option = nchart.makePieData().pie();
+                this.chartObj = new PieChart(this.data);
+                option = this.chartObj.pie(config.pieConfig);
                 break;
+            case 990: //年份分类
+                this.chartObj = new SpecialChart(this.data);
+                option = this.chartObj.special02();
+                break;
+            case 991: //数量&增长率分开
+                this.chartObj = new SpecialChart(this.data);
+                option = this.chartObj.special01();
+                break;
+            case 992: //高级百分比
+                this.chartObj = new SpecialChart(this.data);
+                option = this.chartObj.special03();
+                break;
+            case 993: //饼图百分比
+                this.chartObj = new SpecialChart(this.data);
+                option = this.chartObj.special04();
+                break;
+            default:
+                option = {};  
         }
 
-        //添加toolbox
-        option.toolbox = addToolbox(this.data);
-
-        //添加dataZoom
-        if(ifDataZoom==true){
+        //补充添加配置项
+        if(config.ifTitle==true){
+            option.title = addTitle(this.data.title);
+        }
+        if(config.ifToolBox==true){
+            option.toolbox = addToolbox(this.data);
+        }
+        if(config.ifDataZoom==true && this.chartObj.xdata){
             option.grid.bottom = "10%"; //改变底部距离
-            option.dataZoom = addDataZoom(nchart.xdata);
+            option.dataZoom = addDataZoom(this.chartObj.xdata);
         }
-        
 
-        this.chart.setOption(option);  
+        return option;
+    }
+
+    //绘制图表
+    drawChart(config){
+        this.echart = echarts.init(document.getElementById(this.panelId), "macarons"); //初始化echarts实例
+        let option = this.setOption(config);
+
+        this.echart.setOption(option);  
         //屏幕大小改变
         window.addEventListener("resize", ()=>{
-            this.chart.resize();
+            this.echart.resize();
         });
         return this;
     }
@@ -84,7 +115,7 @@ class SuCharts{
 
     //绑定点击事件
     bind(callback){
-        this.chart.on('click', (params)=> {
+        this.echart.on('click', (params)=> {
             console.log(params);
             callback(params.seriesIndex, params.seriesName); //回调函数
         });
@@ -96,9 +127,28 @@ class SuCharts{
 export { SuCharts }
 
 
+//添加标题
+function addTitle(chartTitle){
+    let title = {
+        text: chartTitle,
+        right:'center',
+        top: 10
+    };
+    return title;
+}
+
+//添加图例组件
+function addLegend(legendData){
+    let legend = {
+        data: legendData,
+        type: 'scroll',
+        top: '6%'
+    };
+}
+
 //添加toolbox
 function addToolbox(data){
-    var toolbox = {
+    let toolbox = {
         right: 24,
         feature: {
             saveAsImage: { 
@@ -132,10 +182,10 @@ function addToolbox(data){
 
 //添加dataZoom
 function addDataZoom(xdata) {
-    var startValue = xdata[0];
-    var endValue = xdata.length>10 ? xdata[9] : xdata[xdata.length-1];
+    let startValue = xdata[0];
+    let endValue = xdata.length>10 ? xdata[9] : xdata[xdata.length-1];
 
-    var dataZoom = [{
+    let dataZoom = [{
         show: true,
         height: 30,
         bottom: 10,

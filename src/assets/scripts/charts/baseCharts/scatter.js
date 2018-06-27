@@ -8,8 +8,8 @@ class ScatterChart extends BaseChart {
         var legenddata = [];
         var seriesData = [];
 
-        var sourceData = this.list;
-        var max = Enumerable.From(this.list).Select('$.value').Max(); //value最大值
+        var sourceData = this.chartData;
+        var max = Enumerable.From(this.chartData).Select('$.value').Max(); //value最大值
 
         //拼接数据
         sourceData.forEach(function(item,index){

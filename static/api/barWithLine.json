@@ -3,7 +3,10 @@
     "msg": "",
     "data": {
       "title": "bar03",
-      "chartdata": [
+      "xUnit": "年",
+      "yUnit": "次",
+      "chartType": 100,
+      "chartData": [
         {
           "x": "2013",
           "y": "手术量",
