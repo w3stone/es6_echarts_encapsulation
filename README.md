@@ -15,8 +15,8 @@ npm run build
 npm run build --report
 ```
 
-# 数据格式(Data Format)
-·javascript
+## 数据格式(Data Format)
+``javascript
   data:{
 	"chartData": [ //主要数据
 		{"x":"", "y":"", "value":0, "name":""},
@@ -31,4 +31,4 @@ npm run build --report
     yUnit: "", //y轴单位
     vUnit: "", //value轴单位   
 }
-`
+``
