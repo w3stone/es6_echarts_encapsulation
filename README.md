@@ -1,20 +1,4 @@
 
-## Build Setup
-
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-```
-
 ## 数据格式(Data Format)
 ```javascript
 
@@ -25,7 +9,7 @@ npm run build --report
       ......
     ],
     "title":"", //标题
-	  "chartType": 0, //图表模板id
+	"chartType": 0, //图表模板id
     "xTitle": "", //x轴标题
     "yTitle": "", //y轴标题
     "xUnit": "", //x轴单位
@@ -34,3 +18,26 @@ npm run build --report
 }
 
 ```
+
+## 使用方法(How to Use)
+
+### 1、使用chartItem组件(Use chartItem template)
+
+```html
+
+    <chart-item :data="data" chartId="id" :chartType="101" chartConfig=""></chart-item>
+
+```
+
+### 2、直接使用(Direct Use)
+
+```javascript
+
+    var chart = new SuCharts(data, chartId, chartType);
+    chart.drawChart(chartConfig);
+
+```
+
+### 补充(Additional Remarks)
+chartType: see in "@/assets/scripts/charts/suCharts.js"
+chartConfig: see in "@/assets/scripts/charts/tools/defaultConfig.js"
