@@ -1,8 +1,8 @@
 {
-  "name": "suvalue_charts",
-  "version": "1.0.0",
+  "name": "vue_echarts_encapsulation",
+  "version": "0.1.3",
   "description": "a Vue.js project by suvalue",
-  "author": "suvalue",
+  "author": "wjl",
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
