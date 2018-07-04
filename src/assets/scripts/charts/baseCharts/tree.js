@@ -19,27 +19,21 @@ class TreeChart extends BaseChart {
                 {
                     type: 'tree',
                     data: [this.treeData],
-                    left: '4%',
-                    right: '4%',
-                    top: '15%',
-                    bottom: '25%',
-    
                     symbol: 'emptyCircle',
-    
                     orient: 'vertical',
-    
-                    expandAndCollapse: true,
-    
                     label: { 
                         normal: {
                             position: 'top',
                             rotate: 0,
                             verticalAlign: 'middle',
                             align: 'right',
-                            fontSize: 16
+                            fontSize: 16,
+                            formatter:(ele)=>{
+                                var data = ele.data;
+                                return data.value? data.name+":"+data.value: data.name;
+                            }
                         }
                     },
-    
                     leaves: {
                         label: {
                             normal: {
@@ -51,8 +45,12 @@ class TreeChart extends BaseChart {
                             }
                         }
                     },
-    
-                    animationDurationUpdate: 750
+                    left: '4%',
+                    right: '4%',
+                    top: '15%',
+                    bottom: '25%'
+                    //expandAndCollapse: true,
+                    //animationDurationUpdate: 750
                 }
             ]
         }

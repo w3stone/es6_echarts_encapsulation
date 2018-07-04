@@ -7,9 +7,11 @@
       "chartData": [],
       "treeData": {
         "name": "flare",
+        "value": 3343,
         "children": [
          {
           "name": "analytics",
+          "value": 389,
           "children": [
            {
             "name": "cluster",
@@ -40,6 +42,7 @@
          },
          {
           "name": "animate",
+          "value": 456,
           "children": [
            {"name": "Easing", "value": 17010},
            {"name": "FunctionSequence", "value": 5842},
@@ -70,6 +73,7 @@
          },
          {
           "name": "data",
+          "value": 777,
           "children": [
            {
             "name": "converters",
@@ -91,6 +95,7 @@
          },
          {
           "name": "display",
+          "value": 889,
           "children": [
            {"name": "DirtySprite", "value": 8833},
            {"name": "LineSprite", "value": 1732},
@@ -99,13 +104,8 @@
           ]
          },
          {
-          "name": "flex",
-          "children": [
-           {"name": "FlareVis", "value": 4116}
-          ]
-         },
-         {
           "name": "physics",
+          "value": 945,
           "children": [
            {"name": "DragForce", "value": 1082},
            {"name": "GravityForce", "value": 1336},
@@ -118,77 +118,8 @@
           ]
          },
          {
-          "name": "query",
-          "children": [
-           {"name": "AggregateExpression", "value": 1616},
-           {"name": "And", "value": 1027},
-           {"name": "Arithmetic", "value": 3891},
-           {"name": "Average", "value": 891},
-           {"name": "BinaryExpression", "value": 2893},
-           {"name": "Comparison", "value": 5103},
-           {"name": "CompositeExpression", "value": 3677},
-           {"name": "Count", "value": 781},
-           {"name": "DateUtil", "value": 4141},
-           {"name": "Distinct", "value": 933},
-           {"name": "Expression", "value": 5130},
-           {"name": "ExpressionIterator", "value": 3617},
-           {"name": "Fn", "value": 3240},
-           {"name": "If", "value": 2732},
-           {"name": "IsA", "value": 2039},
-           {"name": "Literal", "value": 1214},
-           {"name": "Match", "value": 3748},
-           {"name": "Maximum", "value": 843},
-           {
-            "name": "methods",
-            "children": [
-             {"name": "add", "value": 593},
-             {"name": "and", "value": 330},
-             {"name": "average", "value": 287},
-             {"name": "count", "value": 277},
-             {"name": "distinct", "value": 292},
-             {"name": "div", "value": 595},
-             {"name": "eq", "value": 594},
-             {"name": "fn", "value": 460},
-             {"name": "gt", "value": 603},
-             {"name": "gte", "value": 625},
-             {"name": "iff", "value": 748},
-             {"name": "isa", "value": 461},
-             {"name": "lt", "value": 597},
-             {"name": "lte", "value": 619},
-             {"name": "max", "value": 283},
-             {"name": "min", "value": 283},
-             {"name": "mod", "value": 591},
-             {"name": "mul", "value": 603},
-             {"name": "neq", "value": 599},
-             {"name": "not", "value": 386},
-             {"name": "or", "value": 323},
-             {"name": "orderby", "value": 307},
-             {"name": "range", "value": 772},
-             {"name": "select", "value": 296},
-             {"name": "stddev", "value": 363},
-             {"name": "sub", "value": 600},
-             {"name": "sum", "value": 280},
-             {"name": "update", "value": 307},
-             {"name": "variance", "value": 335},
-             {"name": "where", "value": 299},
-             {"name": "xor", "value": 354},
-             {"name": "-", "value": 264}
-            ]
-           },
-           {"name": "Minimum", "value": 843},
-           {"name": "Not", "value": 1554},
-           {"name": "Or", "value": 970},
-           {"name": "Query", "value": 13896},
-           {"name": "Range", "value": 1594},
-           {"name": "StringUtil", "value": 4130},
-           {"name": "Sum", "value": 791},
-           {"name": "Variable", "value": 1124},
-           {"name": "Variance", "value": 1876},
-           {"name": "Xor", "value": 1101}
-          ]
-         },
-         {
           "name": "scale",
+          "value": 455,
           "children": [
            {"name": "IScaleMap", "value": 2105},
            {"name": "LinearScale", "value": 1316},
@@ -203,52 +134,8 @@
           ]
          },
          {
-          "name": "util",
-          "children": [
-           {"name": "Arrays", "value": 8258},
-           {"name": "Colors", "value": 10001},
-           {"name": "Dates", "value": 8217},
-           {"name": "Displays", "value": 12555},
-           {"name": "Filter", "value": 2324},
-           {"name": "Geometry", "value": 10993},
-           {
-            "name": "heap",
-            "children": [
-             {"name": "FibonacciHeap", "value": 9354},
-             {"name": "HeapNode", "value": 1233}
-            ]
-           },
-           {"name": "IEvaluable", "value": 335},
-           {"name": "IPredicate", "value": 383},
-           {"name": "IValueProxy", "value": 874},
-           {
-            "name": "math",
-            "children": [
-             {"name": "DenseMatrix", "value": 3165},
-             {"name": "IMatrix", "value": 2815},
-             {"name": "SparseMatrix", "value": 3366}
-            ]
-           },
-           {"name": "Maths", "value": 17705},
-           {"name": "Orientation", "value": 1486},
-           {
-            "name": "palette",
-            "children": [
-             {"name": "ColorPalette", "value": 6367},
-             {"name": "Palette", "value": 1229},
-             {"name": "ShapePalette", "value": 2059},
-             {"name": "SizePalette", "value": 2291}
-            ]
-           },
-           {"name": "Property", "value": 5559},
-           {"name": "Shapes", "value": 19118},
-           {"name": "Sort", "value": 6887},
-           {"name": "Stats", "value": 6557},
-           {"name": "Strings", "value": 22026}
-          ]
-         },
-         {
           "name": "vis",
+          "value": 667,
           "children": [
            {
             "name": "axis",
