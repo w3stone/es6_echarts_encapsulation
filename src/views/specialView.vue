@@ -43,7 +43,6 @@
 
             //普通柱状图
             dataGet("http://47.98.205.88:3000/api/barData02.json", (data)=>{
-                data = data[0];
                 data.title = "高级百分比";
                 data.chartType = 992;
                 this.specialData3 = data;
@@ -52,7 +51,6 @@
 
             //普通柱状图
             dataGet("http://47.98.205.88:3000/api/barData02.json", (data)=>{
-                data = data[0];
                 data.title = "饼图百分比";
                 data.chartType = 993;
                 this.specialData4 = data;

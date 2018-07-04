@@ -10,18 +10,10 @@ class PieChart extends BaseChart {
         this.vdata = [];
     }
 
-    _init(){
-        let workedData = makePieData(this.chartData);
-        this.legenddata = workedData.legenddata;
-        this.vdata = workedData.vdata;
-    }
-
     //占比饼图
-    pie(pieConfig){
+    tree(treeConfig){
         this._init();
         let series = [];
-        let seriesData = [];
-        let sum = 0; //总和
 
         let innerRadius = pieConfig.innerRadius || '0';
         let outerRadius = pieConfig.outerRadius || '60%';

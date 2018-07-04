@@ -38,7 +38,7 @@ class PieChart extends BaseChart {
             label: { 
                 normal: { 
                     show: pieConfig.pieLabelShow,
-                    formatter: '{b}({d}%)' 
+                    formatter: '{b} : {c} ({d}%)' 
                 } 
             },
             radius: [pieConfig.innerRadius, pieConfig.outerRadius],
@@ -50,7 +50,7 @@ class PieChart extends BaseChart {
         var option = {
             tooltip: {
                 trigger: 'item',
-                formatter: "{a} <br/>{b} : {c} ({d}%)"
+                formatter: "{b} : {c} ({d}%)"
             },
             series: series
         };

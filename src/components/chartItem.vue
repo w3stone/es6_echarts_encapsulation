@@ -33,11 +33,7 @@
         },
         data: function() {
             return {
-                finalConfig: { //图表配置项
-                    barConfig: {
-                        barWidth: '30%' //图表宽度
-                    }
-                }
+                
             }
         },
         computed:{
@@ -46,7 +42,7 @@
                 return chart;
             },
             option(){ //echarts配置项
-                return this.chart.setOption(this.config);
+                return this.chart.setOption(this.chartConfig); //初始化option，并添加config
             },
             finalChartId(){
                 return this.chartId || this.data.title;

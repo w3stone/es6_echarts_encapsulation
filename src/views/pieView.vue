@@ -2,6 +2,7 @@
     <div class="pieView">
         <p id="pieNormal" style="width:80%;height:500px;"></p>
         <chart-item :data="pieData01" chartId="饼图01"></chart-item>
+        <chart-item :data="pieData02" chartId="饼图02" :chartConfig="config"></chart-item>
     </div>
 </template>
 
@@ -14,7 +15,13 @@
         name: "pieView",
         data (){
             return{
-                pieData01: {}
+                pieData01: {},
+                pieData02: {},
+                config:{
+                    pieConfig:{
+                        innerRadius: '30%', //内圈半径
+                    }
+                }
             }
         },
         mounted(){
@@ -22,14 +29,16 @@
             dataGet("http://47.98.205.88:3000/api/pieData.json", (data)=>{
                 data.title = "普通饼图104";
                 var chart = new SuCharts(data, "pieNormal", 104);
-                chart.drawChart(); //二级图表重绘
+                chart.drawChart(); //绘制图表
             });
 
             //普通柱状图
             dataGet("http://47.98.205.88:3000/api/pieData.json", (data)=>{
-                data.title = "普通饼图104";
                 data.chartType = 104;
-                this.pieData01 = data;
+                this.pieData01 = JSON.parse(JSON.stringify(data));
+                this.pieData02 = JSON.parse(JSON.stringify(data));
+                this.pieData01.title = "普通饼图";
+                this.pieData02.title = "添加配置项";
             });
 
         },
