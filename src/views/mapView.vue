@@ -29,10 +29,5 @@
 </script>
 
 <style lang="scss" type="test/css">
-    .mapView{
-        width:100%;
-        height:100%;
-    }
-
     
 </style>

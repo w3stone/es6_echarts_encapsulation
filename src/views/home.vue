@@ -1,6 +1,5 @@
 <template>
     <div class="homeIndex">
-	    <headerbar></headerbar>
         <div class="main_content clearfix">
             <left-menu></left-menu>
             <div class="main">
@@ -11,18 +10,12 @@
 </template>
 
 <script>
-    import headerbar from '@/components/headerbar'
     import leftMenu from '@/components/leftMenu'
 	
 	export default {
         name: "home",
-        data (){
-            return{
-                
-            }
-        },
 		components:{
-			headerbar,leftMenu
+			leftMenu
         },
         beforeCreate:function(){
             this.$router.push("/bar"); //默认路由
@@ -41,10 +34,9 @@
             box-sizing: border-box;
             width: 100%;
             height: 100%;
-            padding-top: 60px;
             background: #fff;
             overflow-x: hidden;
-            overflow-y: auto;
+            overflow-y: hidden;
 
             .main{
                 box-sizing: border-box;

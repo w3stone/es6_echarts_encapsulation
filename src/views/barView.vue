@@ -78,10 +78,6 @@
 
 <style lang="scss" type="test/css">
     .barView{
-        //overflow-y: auto;
-        width:100%;
-        height:100%;
-
         h4{
             text-align: center;
             font-size: 20px;

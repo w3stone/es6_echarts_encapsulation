@@ -32,10 +32,5 @@
 </script>
 
 <style lang="scss" type="test/css">
-    .scatterView{
-        width:100%;
-        height:100%;
-    }
-
     
 </style>

@@ -25,11 +25,5 @@
 </script>
 
 <style lang="scss" type="test/css">
-    .lineView{
-        overflow-y: auto;
-        width:100%;
-        height:100%;
-    }
-
     
 </style>
