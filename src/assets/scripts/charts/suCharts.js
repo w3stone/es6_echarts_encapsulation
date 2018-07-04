@@ -4,6 +4,7 @@ import {LineChart} from "./baseCharts/line.js";
 import {ScatterChart} from "./baseCharts/scatter.js";
 import {MapChart} from "./baseCharts/map.js";
 import {SpecialChart} from "./baseCharts/special.js";
+import {TreeChart} from "./baseCharts/tree.js";
 import {defaultConfig} from "./tools/defaultConfig.js"
 import {mergeJson, exportExcel} from "./tools/otherFn.js"
 
@@ -33,6 +34,10 @@ class SuCharts{
         config = config? mergeJson(defaultConfig, config): defaultConfig; //合并对象
 
         switch (this.chartType){
+            case 98: //纵向树状图
+                this.chartObj = new TreeChart(this.data);
+                option = this.chartObj.tree();
+                break;
             case 99: //地图
                 this.chartObj = new MapChart(this.data);
                 option = this.chartObj.map();

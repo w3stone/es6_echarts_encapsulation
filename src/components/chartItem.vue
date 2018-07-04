@@ -14,20 +14,24 @@
     export default {
         name: "chartItem",
         props:{
-            data:{
+            data:{ //主要数据源
                 type: Object,
                 required: true
             },
-            chartId:{
+            chartId:{ //图表id
                 type: String,
                 required: false
             },
-            chartType:{
+            chartType:{ //图表模板序号
                 type: Number,
                 required: false
             },
-            chartConfig:{
+            chartConfig:{ //图表配置项
                 type: Object,
+                required: false
+            },
+            height:{
+                type: String,
                 required: false
             }
         },
@@ -51,13 +55,7 @@
                 return parseInt(this.chartType || this.data.chartType);
             },
             f_height(){
-                if(this.finalChartType==990){
-                    //debugger
-                    var length = Enumerable.From(this.data.chartData).Select("o=>o.x").Distinct().ToArray().length;
-                    return 400*length + "px";
-                }else{
-                    return "400px";
-                }
+                return this.height || "400px";
             }
         },
         mounted(){
@@ -112,8 +110,6 @@
         .chart_panel{
             position: relative;
             width: 100%;
-            //height: 400px;
-            height: 100%;
 
             .no_data{
                 width: 100px;

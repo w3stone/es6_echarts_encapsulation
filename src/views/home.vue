@@ -1,10 +1,8 @@
 <template>
-    <div class="homeIndex">
-        <div class="main_content clearfix">
-            <left-menu></left-menu>
-            <div class="main">
-                <router-view></router-view>
-            </div>
+    <div class="homeIndex clearfix">
+        <left-menu></left-menu>
+        <div class="main_content">
+            <router-view></router-view>
         </div>
     </div>
 </template>
@@ -26,30 +24,23 @@
 
 <style lang="scss" type="test/css">
     .homeIndex{
+        position: relative;
         width:100%;
         height:100%;
+        background: #fff;
+        overflow-x: hidden;
+        overflow-y: hidden;         
 
         .main_content{
-            position: relative;
             box-sizing: border-box;
-            width: 100%;
+            float: left;
+            width: calc(100% - 100px);
             height: 100%;
-            background: #fff;
+            padding: 20px;
             overflow-x: hidden;
-            overflow-y: hidden;
-
-            .main{
-                box-sizing: border-box;
-                float: left;
-                width: calc(100% - 100px);
-                height: 100%;
-                padding: 20px;
-                overflow-x: hidden;
-                overflow-y: auto;
-            }
-            
+            overflow-y: auto;
         }
-        
+                
     }
     
 </style>

@@ -12,7 +12,6 @@ export default {
 
 <style lang="scss" type="text/css">
     #app {
-        font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         width: 100%;
@@ -75,6 +74,22 @@ export default {
         bottom: 0;
         left: 0;
     }
+    /**设置滚动条的样式**/
+    ::-webkit-scrollbar {
+        width: 12px;
+    }
+    //滚动槽
+    ::-webkit-scrollbar-track {
+        background: #fff;
+        //border: 1px solid #bbb;
+        border-radius: 12px;
+    }
+    //滚动条滑块
+    ::-webkit-scrollbar-thumb {
+        border-radius: 12px;
+        background: #ddd;
+    }
+
     //自定义表格样式
     table{
         width: 100%;
