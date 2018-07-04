@@ -21,29 +21,19 @@ class PieChart extends BaseChart {
         this._init();
         let series = [];
         let seriesData = [];
+        let sum = 0; //总和
 
-        //重构vdata数据
-        this.vdata.forEach((val, index) => {
-            if (!this.legenddata[index]) { 
-                this.legenddata[index] = "未填";
-            }
-            var obj = { name: this.legenddata[index], value: val };
-            seriesData.push(obj);
-        });
+        let innerRadius = pieConfig.innerRadius || '0';
+        let outerRadius = pieConfig.outerRadius || '60%';
 
         //其它series配置项
         var config = {
             name: '占比',
             type: 'pie',
-            label: { 
-                normal: { 
-                    show: pieConfig.pieLabelShow,
-                    formatter: '{b}({d}%)' 
-                } 
-            },
-            radius: [pieConfig.innerRadius, pieConfig.outerRadius],
-            center: [pieConfig.xCenter, pieConfig.yCenter],
-            data: seriesData
+            label: { normal: { formatter: '{b} : {c} ({d}%)' } },
+            radius: [innerRadius, outerRadius],
+            center: ['50%', '58%'],
+            data: this.chartData
         }
         series.push(config);
 
