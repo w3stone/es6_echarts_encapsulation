@@ -7,13 +7,6 @@ import App from './App'
 import router from './router'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
-import store from './store/store'
-import $ from 'jquery'
-//import {SuCharts} from '@/components/charts/suCharts.js'
-
-//import './assets/css/bootstrap.min.css' 
-//import './assets/css/iconfont.css'
-//import './assets/scripts/bootstrap.min.js' 
 
 Vue.config.productionTip = false;
 Vue.use(ElementUI, VueAxios, axios);
@@ -23,6 +16,5 @@ Vue.use(ElementUI, VueAxios, axios);
 new Vue({
   el: '#app',
   router,
-  store,
   render: h => h(App)
 })
