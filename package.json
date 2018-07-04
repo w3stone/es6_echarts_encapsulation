@@ -1,6 +1,6 @@
 {
   "name": "vue_echarts_encapsulation",
-  "version": "0.1.3",
+  "version": "0.1.5",
   "description": "a Vue.js project by suvalue",
   "author": "wjl",
   "private": true,
@@ -15,8 +15,7 @@
     "jquery": "^1.12.4",
     "vue": "^2.5.2",
     "vue-axios": "^2.0.2",
-    "vue-router": "^3.0.1",
-    "vuex": "^3.0.1"
+    "vue-router": "^3.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
