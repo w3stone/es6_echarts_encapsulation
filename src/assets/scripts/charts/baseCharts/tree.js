@@ -9,7 +9,7 @@ class TreeChart extends BaseChart {
     }
 
     //占比饼图
-    tree(treeConfig){
+    tree(){
         let option = {
             tooltip: {
                 trigger: 'item',
