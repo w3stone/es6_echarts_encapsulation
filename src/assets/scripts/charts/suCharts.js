@@ -34,9 +34,13 @@ class SuCharts{
         config = config? mergeJson(defaultConfig, config): defaultConfig; //合并对象
 
         switch (this.chartType){
+            case 97: //水平树状图
+                this.chartObj = new TreeChart(this.data);
+                option = this.chartObj.tree_horizon();
+                break;
             case 98: //纵向树状图
                 this.chartObj = new TreeChart(this.data);
-                option = this.chartObj.tree();
+                option = this.chartObj.tree_vertical();
                 break;
             case 99: //地图
                 this.chartObj = new MapChart(this.data);
