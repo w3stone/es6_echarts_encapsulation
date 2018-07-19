@@ -7,11 +7,11 @@
       "chartData": [],
       "treeData": {
         "name": "flare",
-        "value": 3343,
+        "value": "3343",
         "children": [
          {
           "name": "analytics",
-          "value": 389,
+          "value": "386",
           "children": [
            {
             "name": "cluster",

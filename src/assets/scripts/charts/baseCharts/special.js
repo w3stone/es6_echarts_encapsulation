@@ -155,17 +155,17 @@ class SpecialChart extends BaseChart {
         let grid = [];
         let series = [];
 
-        let allYear = Enumerable.From(this.chartData).Select("o=>o.x").Distinct().OrderBy().ToArray();
+        let allYear = Enumerable.from(this.chartData).select("o=>o.x").distinct().orderBy().toArray();
         let length = allYear.length;
         let space = parseInt(100/length);
         
         //年份循环
         allYear.forEach((year, yearIndex)=>{
-            let useableData = Enumerable.From(this.chartData).Where((o)=>{ return o.x==year; }).OrderBy().ToArray();
+            let useableData = Enumerable.from(this.chartData).where((o)=>{ return o.x==year; }).orderBy().toArray();
             //console.log(useableData);
 
             //左边柱状图
-            let xdata = Enumerable.From(useableData).Select("o=>o.y").Distinct().OrderBy().ToArray();
+            let xdata = Enumerable.from(useableData).select("o=>o.y").distinct().orderBy().toArray();
             console.log(xdata);
             let x_conf = { //x轴配置
                 gridIndex: yearIndex,
@@ -223,10 +223,10 @@ class SpecialChart extends BaseChart {
 
         });
 
-        console.log(JSON.stringify(xAxis));
-        console.log(JSON.stringify(yAxis));
-        console.log(JSON.stringify(grid));
-        console.log(JSON.stringify(series));
+        // console.log(JSON.stringify(xAxis));
+        // console.log(JSON.stringify(yAxis));
+        // console.log(JSON.stringify(grid));
+        // console.log(JSON.stringify(series));
 
         let option = {
             tooltip: {
@@ -354,8 +354,8 @@ class SpecialChart extends BaseChart {
         var series = [];
 
         this.xdata.forEach((xitem, index)=>{
-            var useableData = Enumerable.From(this.chartData).Where((o)=>{return o.x == xitem}).OrderBy().ToArray();
-            var data = Enumerable.From(useableData).Where((o)=>{return o.name = o.y}).OrderBy().ToArray();
+            var useableData = Enumerable.from(this.chartData).where((o)=>{return o.x == xitem}).orderBy().toArray();
+            var data = Enumerable.from(useableData).where((o)=>{return o.name = o.y}).orderBy().toArray();
 
             var xCenter = space*(index+1) + "%";
 

@@ -13,7 +13,7 @@ class ScatterChart extends BaseChart {
         var seriesData = [];
 
         var sourceData = this.chartData;
-        var max = Enumerable.From(sourceData).Select('$.value').Max(); //value最大值
+        var max = Enumerable.from(sourceData).select('$.value').max(); //value最大值
 
         //拼接数据
         sourceData.forEach(function(item,index){

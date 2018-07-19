@@ -71,7 +71,8 @@
                 if($("#"+ this.finalChartId).length>0){
                 //if(this.option['series'].length>0 && Object.keys(this.option).length>0){
                     let echart = echarts.init(document.getElementById(this.finalChartId), "macarons"); //初始化echarts实例
-
+                    echart.clear(); //清空
+                    
                     echart.setOption(this.option);
                     //屏幕大小改变
                     window.addEventListener("resize", ()=>{
