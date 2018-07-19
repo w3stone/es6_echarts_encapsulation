@@ -22,7 +22,6 @@
         name: "barView",
         data (){
             return{
-                randomTime: Math.random()*500+500,
                 barNormalData: {},
                 barWithLineData: {},
                 chartConfig:{
@@ -42,30 +41,35 @@
         mounted(){
             //普通柱状图
             dataGet("barData", (data)=>{
-                this.barNormalData = data;
-                console.log(this.barNormalData);
                 data.title = "普通柱状图101";
+                this.barNormalData = data;
+
+                //直接绘制
                 var chart = new SuCharts(data, "barNormal", 101);
-                chart.drawChart(this.chartConfig); //二级图表重绘 
+                chart.drawChart(this.chartConfig); 
             });
             //柱状图+增长率
             dataGet("barWithLine", (data)=>{
+                data.title = "柱状图+增长率102";
+                data.chartType = 102;
                 this.barWithLineData = data;
-                data.title = "柱状图+增长率100";
-                var chart = new SuCharts(data, "barWithLine", 100);
-                chart.drawChart(this.chartConfig); //二级图表重绘
+                
+                
+                //直接绘制
+                var chart = new SuCharts(data, "barWithLine", 102);
+                chart.drawChart(this.chartConfig); 
             });
             //百分柱状图
             dataGet("barPerData", (data)=>{
                 data.title = "百分比柱状图105";
                 var chart = new SuCharts(data, "barPer", 105);
-                chart.drawChart(this.chartConfig); //二级图表重绘
+                chart.drawChart(this.chartConfig);
             });
             //动态求和
             dataGet("barPerData", (data)=>{
                 data.title = "柱状图动态求和113";
                 var chart = new SuCharts(data, "barDynamic", 113);
-                chart.drawChart(this.chartConfig1); //二级图表重绘
+                chart.drawChart(this.chartConfig1);
             });
             
         },

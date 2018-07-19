@@ -46,13 +46,13 @@ class SuCharts{
                 this.chartObj = new MapChart(this.data);
                 option = this.chartObj.map();
                 break;
-            case 100: //柱状图+增长率
-                this.chartObj = new BarChart(this.data);
-                option = this.chartObj.barWithLine(config.barConfig);
-                break;
             case 101: //柱状图普通
                 this.chartObj = new BarChart(this.data);
                 option = this.chartObj.bar(config.barConfig);
+                break;
+            case 102: //柱状图+增长率
+                this.chartObj = new BarChart(this.data);
+                option = this.chartObj.barWithLine(config.barConfig);
                 break;
             case 105: //柱状图百分比
                 this.chartObj = new BarChart(this.data);
@@ -70,7 +70,7 @@ class SuCharts{
                 nchart = new LineChart(this.data);
                 option = nchart.line();
                 break;
-            case 104: //饼图
+            case 201: //饼图
                 this.chartObj = new PieChart(this.data);
                 option = this.chartObj.pie(config.pieConfig);
                 break;

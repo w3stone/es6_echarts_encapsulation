@@ -27,18 +27,18 @@
         mounted(){
             //普通柱状图
             dataGet("http://47.98.205.88:3000/api/pieData.json", (data)=>{
-                data.title = "普通饼图104";
-                var chart = new SuCharts(data, "pieNormal", 104);
+                data.title = "普通饼图201";
+                var chart = new SuCharts(data, "pieNormal", 201);
                 chart.drawChart(); //绘制图表
             });
 
             //普通柱状图
             dataGet("http://47.98.205.88:3000/api/pieData.json", (data)=>{
-                data.chartType = 104;
+                data.chartType = 201;
                 this.pieData01 = JSON.parse(JSON.stringify(data));
                 this.pieData02 = JSON.parse(JSON.stringify(data));
-                this.pieData01.title = "普通饼图";
-                this.pieData02.title = "添加配置项";
+                this.pieData01.title = "普通饼图201";
+                this.pieData02.title = "添加配置项201";
             });
 
         },
