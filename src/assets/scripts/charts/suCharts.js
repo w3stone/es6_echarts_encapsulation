@@ -34,6 +34,7 @@ class SuCharts{
         config = config? mergeJson(defaultConfig, config): defaultConfig; //合并对象
 
         switch (this.chartType){
+            /**树状图**/
             case 97: //水平树状图
                 this.chartObj = new TreeChart(this.data);
                 option = this.chartObj.tree_horizon();
@@ -46,6 +47,7 @@ class SuCharts{
                 this.chartObj = new MapChart(this.data);
                 option = this.chartObj.map();
                 break;
+            /**柱状图**/
             case 101: //柱状图普通
                 this.chartObj = new BarChart(this.data);
                 option = this.chartObj.bar(config.barConfig);
@@ -66,14 +68,17 @@ class SuCharts{
                 this.chartObj = new BarChart(this.data);
                 option = this.chartObj.barDynamic(this.echart, config.barConfig);
                 break;
-            case 12: //折线图普通
-                nchart = new LineChart(this.data);
-                option = nchart.line();
-                break;
+            /**饼图**/
             case 201: //饼图
                 this.chartObj = new PieChart(this.data);
                 option = this.chartObj.pie(config.pieConfig);
                 break;
+            /**折线图**/
+            case 301: //折线图普通
+                nchart = new LineChart(this.data);
+                option = nchart.line();
+                break;
+            /**特殊图**/
             case 990: //年份分类
                 this.chartObj = new SpecialChart(this.data);
                 option = this.chartObj.special02();
