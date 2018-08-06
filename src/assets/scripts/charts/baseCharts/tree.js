@@ -39,6 +39,7 @@ class TreeChart extends BaseChart {
                     leaves: {
                         label: {
                             normal: {
+                                //show:false,
                                 position: 'bottom',
                                 verticalAlign: 'middle',
                                 align: 'left',

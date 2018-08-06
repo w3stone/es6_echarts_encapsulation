@@ -9,8 +9,8 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 
 Vue.config.productionTip = false;
+//Vue.use(VueAxios, axios);
 Vue.use(ElementUI, VueAxios, axios);
-//Vue.prototype.SuCharts = SuCharts; //引入Charts类
 
 /* eslint-disable no-new */
 new Vue({

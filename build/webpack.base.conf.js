@@ -15,7 +15,8 @@ module.exports = {
   },
   externals: {
     "echarts": "echarts",
-    "macarons": "macarons"
+    "macarons": "macarons",
+    //'element-ui': 'ElementUI',
   }, 
   output: {
     path: config.build.assetsRoot,
