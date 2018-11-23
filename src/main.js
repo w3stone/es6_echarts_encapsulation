@@ -12,6 +12,25 @@ Vue.config.productionTip = false;
 //Vue.use(VueAxios, axios);
 Vue.use(ElementUI, VueAxios, axios);
 
+//获取数据
+Vue.prototype.$dataGet = function(apiName, callback){
+    let url = "";
+
+    if(apiName.indexOf("http")>-1 || apiName.indexOf("https")>-1){
+        url = apiName;
+    }else{
+        url = "/static/api" + apiName;
+    }
+
+    axios.get(url).then((response) => {
+        let result = response.data.data;
+        if(callback) callback(result);
+
+    }).catch((error)=>{
+        console.log(error);
+    });
+}
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

@@ -1,0 +1,2 @@
+# charts
+echarts_encapsulation

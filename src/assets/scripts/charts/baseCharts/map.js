@@ -7,7 +7,7 @@ class MapChart extends BaseChart{
     map(){
         var seriesData = [];
 
-        this.chartData.forEach((item, index) => {
+        this.chartData.forEach(item => {
             var d = {
                 name: item.name, value: item.value,
                 itemStyle: {
@@ -25,13 +25,12 @@ class MapChart extends BaseChart{
         });
 
         var option = {
-            title: {
-                text: this.title,
-                right:'center'
-            },
             tooltip: {
                 trigger: 'item',
-                show: false
+                show: true,
+                formatter:(ele)=>{
+                    return ele.name + ":" + (ele.value || 0);
+                }
             },
             dataRange: {
                 min: 0,
@@ -58,7 +57,8 @@ class MapChart extends BaseChart{
                                 } else {
                                     return data.name;
                                 }
-                            }
+                            },
+                            fontSize:14
                         },
                         emphasis: {
                             show: true,

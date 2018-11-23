@@ -19,7 +19,7 @@ class SpecialChart extends BaseChart {
         this.vdata = workedData.vdata;
     }
 
-    //普通柱状图
+    //数量&增长率分开
     special01(){
         this._init(false);
         let series1 = [];
@@ -148,111 +148,9 @@ class SpecialChart extends BaseChart {
         return option;
     }
 
-    //
+    //高级百分比
     special02(){
-        let xAxis = [];
-        let yAxis = [];
-        let grid = [];
-        let series = [];
-
-        let allYear = Enumerable.from(this.chartData).select("o=>o.x").distinct().orderBy().toArray();
-        let length = allYear.length;
-        let space = parseInt(100/length);
-        
-        //年份循环
-        allYear.forEach((year, yearIndex)=>{
-            let useableData = Enumerable.from(this.chartData).where((o)=>{ return o.x==year; }).orderBy().toArray();
-            //console.log(useableData);
-
-            //左边柱状图
-            let xdata = Enumerable.from(useableData).select("o=>o.y").distinct().orderBy().toArray();
-            console.log(xdata);
-            let x_conf = { //x轴配置
-                gridIndex: yearIndex,
-                type: 'category',
-                axisLine:{lineStyle:{color:'#000'}},
-                data: xdata,
-                axisLabel: {interval:0, rotate:50, textStyle:{color:'#000'}}
-            };
-            let y_conf = {
-                gridIndex: yearIndex,
-                name: year+"年",
-                type: 'value',
-                axisLine:{lineStyle:{color:'#000'}},
-                axisLabel: {
-                    textStyle:{color:'#000'},
-                    formatter: (value)=>{
-                        return this.setUnit(value);
-                    },
-                }
-            }
-            let grid_conf = {
-                top: (space*yearIndex) + '%',
-                left: '6%',
-                right: '52%',
-                bottom: ((space)*(length-yearIndex)) + '%',
-                containLabel: true
-            }
-            //var eachSeries = [];
-            var arr = [];
-            useableData.forEach((item)=>{
-                arr.push(item.value);
-            });
-
-            let eachSeries = {
-                name: year,
-                type: 'bar',
-                xAxisIndex: yearIndex,
-                yAxisIndex: yearIndex,
-                itemStyle: {normal: {}},
-                data: arr,
-                label: {
-                    normal: {
-                        show: true,
-                        position: 'top'
-                    }
-                }
-            }
-            series.push(eachSeries);
-
-            //
-            xAxis.push(x_conf);
-            yAxis.push(y_conf);
-            grid.push(grid_conf);
-            //series.push(eachSeries);
-
-        });
-
-        // console.log(JSON.stringify(xAxis));
-        // console.log(JSON.stringify(yAxis));
-        // console.log(JSON.stringify(grid));
-        // console.log(JSON.stringify(series));
-
-        let option = {
-            tooltip: {
-                trigger: 'axis',
-                axisPointer: {          
-                    type: 'shadow'     
-                }
-            },
-            xAxis: xAxis,
-            yAxis: yAxis,
-            grid: grid,
-            series: series
-        };
-
-        //let option = {};
-
-        return option;
-    }
-
-
-    //
-    special03(){
         this._init(true);
-
-        //console.log(this.ydata);
-        //console.log(this.vdata);
   
         var series = [];
         var placeHoledStyle = {
@@ -300,8 +198,6 @@ class SpecialChart extends BaseChart {
             series.push(ts);
         })
 
-        //console.log(series);
-
         let option = {
             tooltip : {
                 trigger: 'axis',
@@ -321,8 +217,8 @@ class SpecialChart extends BaseChart {
                 data: this.ydata, type:'scroll', top:'10%'
             },
             grid: {
-                y: 80,
-                y2: 30
+                y: 60,
+                y2: 20
             },
             xAxis : [
                 {
@@ -341,12 +237,13 @@ class SpecialChart extends BaseChart {
             ],
             series: series
         };
-
+        
+        //console.log(JSON.stringify(option));
         return option;
     }
 
-    //
-    special04(){
+    //饼图百分比
+    special03(){
         this._init(true);
 
         var length = this.xdata.length;
@@ -354,24 +251,24 @@ class SpecialChart extends BaseChart {
         var series = [];
 
         this.xdata.forEach((xitem, index)=>{
-            var useableData = Enumerable.from(this.chartData).where((o)=>{return o.x == xitem}).orderBy().toArray();
-            var data = Enumerable.from(useableData).where((o)=>{return o.name = o.y}).orderBy().toArray();
-
+            var useableData = this.chartData.filter((o)=>{return o.x == xitem});
+            var data = useableData.filter((o)=>{return o.name = o.y});
+            
             var xCenter = space*(index+1) + "%";
 
             var ps = {
                 name: this.xdata[index],
                 type: 'pie',
                 //roseType:'radius',
-                radius : '50%',
+                radius : '40%',
                 center: [xCenter, '50%'],
                 data: data,
                 label: {
                     normal: {
-                        position: 'inner',
+                        position: 'outside',
                         formatter: '{d}%',
                         textStyle: {
-                            color: '#ffffff',
+                            color: '#303133',
                             fontSize: 14
                         }
                     }
@@ -397,10 +294,13 @@ class SpecialChart extends BaseChart {
                 }
             },
             legend: {
-                orient: 'vertical',
-                left: 'left',
-                data: this.ydata
+                data: this.ydata, type:'scroll', top:'10%'
             },
+            // legend: {
+            //     orient: 'vertical',
+            //     left: 'left',
+            //     data: this.ydata
+            // },
             // grid: [
             //     {x: '7.5%',y: '65%', width: '88%', height: '60%'},
             // ],

@@ -1,3 +1,6 @@
+import FileSaver from 'file-saver'
+import XLSX from 'xlsx'
+
 //合并对象(临时方法)
 function mergeJson(prev, next){
     var newJson = {};

@@ -1,79 +1,137 @@
+<!--核心图表组件-->
 <template>
-    <div class="chart_item" :style="{height:f_height}">
-        <div class="chart_panel" :id="finalChartId" :style="{height:f_height}">
-            <div class="no_data center" v-show="data">
-                <img src="../assets/img/noData.png" />
+    <div class="chart_item">
+        <div class="chart_top" :style="{'height':f_height+'px'}">
+            <div class="chart_inner">
+                <div class="title_bar">
+                    <h3 class="title">{{f_title}}</h3>
+                </div>
+                <!--图表-->
+                <div class="chart_panel" :id="f_chartId"></div>
+                
+                <!--控制台显示option-->
+                <p v-show="false">{{ JSON.stringify(option) }}</p>
+
+                <div class="no_data center" v-show="f_chartData.length==0">
+                    <img src="../assets/img/noData.png" />
+                </div>
             </div>
         </div>
+
+        <!--表格-->
+        <!-- <div class="table_panel" v-show="f_tableShow">
+            <table-item :tableList="tableList"></table-item>
+        </div> -->
     </div>
 </template>
 
 <script>
+    import {mapState, mapMutations} from 'vuex'
+    // import tableItem from './tableItem'
     import {SuCharts} from '@/assets/scripts/charts/suCharts.js'
+    import {makeBarTable, make2DTable, make4DTable} from '@/assets/scripts/charts/tools/tableFn.js'
     
     export default {
         name: "chartItem",
         props:{
-            data:{ //主要数据源
-                type: Object,
-                required: true
-            },
-            chartId:{ //图表id
-                type: String,
-                required: false
-            },
-            chartType:{ //图表模板序号
-                type: Number,
-                required: false
-            },
-            chartConfig:{ //图表配置项
-                type: Object,
-                required: false
-            },
-            height:{
-                type: String,
-                required: false
-            }
+            data:{ type: Object, required: true},
+            title: String,
+            chartId: String,
+            chartType: Number,
+            config: Object,
+            iconURL: String,
+            height: Number,
+            immediate: Boolean, //watch
+            showtable: Boolean
         },
-        data: function() {
+        data() {
             return {
-                
+                echart: {}, //生成的echart对象
+                tableList: { //表格数据
+                    thead:[],
+                    tbody:[]
+                },
+                tableData: {},
+                option: {}
             }
         },
         computed:{
-            chart(){
-                let chart = new SuCharts(this.data, this.finalChartId, this.finalChartType);
-                return chart;
+            level3Id(){ //三级菜单id
+                return this.$route.query.chartId;
             },
-            option(){ //echarts配置项
-                return this.chart.setOption(this.chartConfig); //初始化option，并添加config
+            dataString(){ //用于watch(Immediate为false)默认
+                if(this.immediate==false || this.immediate==undefined){
+                    return JSON.stringify(this.data);
+                }else{
+                    return "";
+                }          
             },
-            finalChartId(){
-                return this.chartId || this.data.title;
+            dataStringImmediate(){ //用于watch(Immediate为true的情况)
+                if(this.immediate==true){
+                    return JSON.stringify(this.data);
+                }else{
+                    return "";
+                }
             },
-            finalChartType(){
-                return parseInt(this.chartType || this.data.chartType);
+
+            f_title(){
+                let title =  this.title || this.data.title || "";
+                return  title
             },
-            f_height(){
-                return this.height || "400px";
-            }
-        },
-        mounted(){
-            //console.log(this.option);
-            if(this.data.chartData && this.finalChartId && this.finalChartType){
-                //this.drawChart(); //绘制图表 
-            }
+
+            f_chartId(){ return this.chartId || "" },
+
+            f_chartData(){ return this.data.chartdata || [] }, //用于绘图数据
+
+            f_chartType(){ return this.chartType || this.data.charttype || 0 },
             
+            f_tableShow(){ return this.showtable; },
+            
+            //最终图片绝对路径
+            f_iconURL(){
+                //console.log(this.data); 
+                let iconURL = this.iconURL || this.data.iconSource || "";
+                return iconURL? this.imgDomain +'/menu_icon' + iconURL: "";
+            },
+
+            f_height(){ return this.height || 450 },
+
         },
         methods:{
+            ...mapMutations({
+                changeChartDgVisible: "changeChartDgVisible",
+                innerChartData: 'changeInnerChartData' //改变图表弹框数据
+            }),
+            makeTableList(){
+                if(this.f_chartData.length==0){
+                    return {thead:[],tbody:[]};
+                }
+
+                let chartType = this.f_chartType;
+                if((chartType>=100 && chartType<=199) || (chartType>=300 && chartType<=399)){
+                    return makeBarTable(this.tableData);
+
+                }else if(chartType>=400 && chartType<=499){
+                    return make4DTable(this.tableData);
+
+                }else{
+                    return make2DTable(this.tableData);
+
+                }
+            },
             //绘制图表
             drawChart(){
-                if($("#"+ this.finalChartId).length>0){
-                //if(this.option['series'].length>0 && Object.keys(this.option).length>0){
-                    let echart = echarts.init(document.getElementById(this.finalChartId), "macarons"); //初始化echarts实例
-                    echart.clear(); //清空
+                if($("#"+ this.f_chartId).length>0){
+                    let suCharts = new SuCharts(this.data, this.f_chartId, parseInt(this.f_chartType));
                     
+                    this.option = suCharts.setOption(this.config);
+                    this.tableData = suCharts.chartObj;
+
+                    let echart = echarts.init(document.getElementById(this.f_chartId), "macarons"); //初始化echarts实例
+
+                    echart.clear(); //清空
                     echart.setOption(this.option);
+
                     //屏幕大小改变
                     window.addEventListener("resize", ()=>{
                         echart.resize();
@@ -83,10 +141,32 @@
 
         },
         watch:{
-            data:{
+            dataString:{
+                immediate: false,
+                handler(newVal, oldVal){
+                    if(newVal=="") return false;
+                    this.$nextTick(()=>{
+                        //console.log("newVal", newVal);
+                        //console.log("oldVal", oldVal);
+                        //console.log( JSON.stringify(this.option) );
+                        this.drawChart(this.config);
+                        this.tableList = this.makeTableList(); //给tableList附上数据
+                        //console.log(this.tableList);
+                    }) 
+                }
+            },
+            dataStringImmediate:{
                 immediate: true,
                 handler(newVal, oldVal){
-                    this.drawChart();
+                    if(newVal=="") return false;
+                    this.$nextTick(()=>{
+                        //console.log("newVal", newVal);
+                        // console.log("oldVal", oldVal);
+                        // console.log( JSON.stringify(this.option) );
+                        this.drawChart(this.config);
+                        this.tableList = this.makeTableList(); //给tableList附上数据
+                        //console.log(this.tableList);
+                    }) 
                 }
             },
         }
@@ -95,30 +175,56 @@
 </script>
 
 <style lang="scss" scoped="" type="text/css">
+    $chartTitleHeight: 36px;
+
     .chart_item{
-        box-sizing: border-box;
-        width: 100%;
-        padding: 16px;
-        border-bottom: 1px solid #e6e6e6;
+        //box-sizing: border-box;
         background-color: #fff;
-        margin-bottom: 10px;
+        border: 1px solid #ededed;
+        padding: 0 16px;
 
-        .title{
-            font-weight: normal;
-            font-size: 18px;
-        }
-
-        .chart_panel{
+        .chart_inner{
             position: relative;
-            width: 100%;
+            height: 100%;
 
+            //没有数据图片
             .no_data{
                 width: 100px;
                 height: 100px;
             }
-
         }
-        
-    }
+        .chart_top{
+            padding: 16px 0;
+            box-sizing: border-box;
+        }
+        .table_panel{
+            padding-bottom: 16px;
+        }
 
+        //标题
+        .title_bar{
+            position: relative;
+            height: $chartTitleHeight;
+            line-height: $chartTitleHeight;
+
+            .title_icon{
+                display: block;
+                float: left;
+                width: $chartTitleHeight;
+                height: $chartTitleHeight;
+            }
+            .title{
+                padding-left: $chartTitleHeight;
+                font-weight: normal;
+                font-size: 18px;
+            }
+        }
+        //图表
+        .chart_panel{
+            position: relative;
+            width: 100%;
+            height: calc(100% - #{$chartTitleHeight}); //panel高度
+        }
+    
+    }
 </style>

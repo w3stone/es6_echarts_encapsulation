@@ -1,0 +1,111 @@
+{
+  "result": 1,
+  "msg": "",
+  "data": {
+    "title": "bar01",
+    "xtitle": "x标题",
+	"ytitle": "y标题",
+	"vtitle": "value标题",
+	"xunit": "ux",
+	"yunit": "uy",
+	"vunit": "uv",
+    "chartdata": [
+        {
+            "x": "2013",
+            "y": "住院",
+            "xc": null,
+            "yc": null,
+            "value": 479850.0,
+            "name": null
+        },
+        {
+            "x": "2013",
+            "y": "门诊",
+            "xc": null,
+            "yc": null,
+            "value": 1874350.0,
+            "name": null
+        },
+        {
+            "x": "2014",
+            "y": "住院",
+            "xc": null,
+            "yc": null,
+            "value": 585730.0,
+            "name": null
+        },
+        {
+            "x": "2014",
+            "y": "门诊",
+            "xc": null,
+            "yc": null,
+            "value": 1987999.0,
+            "name": null
+        },
+        {
+            "x": "2015",
+            "y": "住院",
+            "xc": null,
+            "yc": null,
+            "value": 587390.0,
+            "name": null
+        },
+        {
+            "x": "2015",
+            "y": "门诊",
+            "xc": null,
+            "yc": null,
+            "value": 2022933.0,
+            "name": null
+        },
+        {
+            "x": "2016",
+            "y": "住院",
+            "xc": null,
+            "yc": null,
+            "value": 607060.0,
+            "name": null
+        },
+        {
+            "x": "2016",
+            "y": "门诊",
+            "xc": null,
+            "yc": null,
+            "value": 2119115.0,
+            "name": null
+        },
+        {
+            "x": "2017",
+            "y": "住院",
+            "xc": null,
+            "yc": null,
+            "value": 583620.0,
+            "name": null
+        },
+        {
+            "x": "2017",
+            "y": "门诊",
+            "xc": null,
+            "yc": null,
+            "value": 1571030.0,
+            "name": null
+        },
+        {
+            "x": "2018",
+            "y": "住院",
+            "xc": null,
+            "yc": null,
+            "value": 12260.0,
+            "name": null
+        },
+        {
+            "x": "2018",
+            "y": "门诊",
+            "xc": null,
+            "yc": null,
+            "value": 556430.0,
+            "name": null
+        }
+    ]
+  }
+}

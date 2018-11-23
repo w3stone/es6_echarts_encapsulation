@@ -6,7 +6,6 @@
 
 <script>
     import {SuCharts} from '@/assets/scripts/charts/suCharts.js'
-    import {makeChart, dataGet} from '@/assets/scripts/tools/fun.js' //全局函数
     import chartItem from '@/components/chartItem'
 	
 	export default {

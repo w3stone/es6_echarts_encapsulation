@@ -8,7 +8,6 @@
 
 <script>
     import {SuCharts} from '@/assets/scripts/charts/suCharts'
-    import {dataGet} from '@/assets/scripts/tools/fun.js' //全局函数
     import chartItem from '@/components/chartItem'
 	
 	export default {

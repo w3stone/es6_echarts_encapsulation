@@ -1,6 +1,6 @@
 //默认配置表
-let defaultConfig = {
-    ifTitle: true, //标题
+const defaultConfig = {
+    ifTitle: false, //标题
     ifToolBox: true, //工具栏
     ifDataZoom: false, //区域缩放
     //柱状图配置项

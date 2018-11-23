@@ -14,6 +14,7 @@ class PieChart extends BaseChart {
         let workedData = makePieData(this.chartData);
         this.legenddata = workedData.legenddata;
         this.vdata = workedData.vdata;
+        //console.log(this.legenddata, this.vdata);
     }
 
     //占比饼图
@@ -21,6 +22,7 @@ class PieChart extends BaseChart {
         this._init();
         let series = [];
         let seriesData = [];
+        //let sum = 0; //总和
 
         //重构vdata数据
         this.vdata.forEach((val, index) => {
@@ -38,7 +40,8 @@ class PieChart extends BaseChart {
             label: { 
                 normal: { 
                     show: pieConfig.pieLabelShow,
-                    formatter: '{b} : {c} ({d}%)' 
+                    formatter: '{b}({d}%)',
+                    fontSize: 16
                 } 
             },
             radius: [pieConfig.innerRadius, pieConfig.outerRadius],
@@ -50,7 +53,7 @@ class PieChart extends BaseChart {
         var option = {
             tooltip: {
                 trigger: 'item',
-                formatter: "{b} : {c} ({d}%)"
+                formatter: "{a} <br/>{b} : {c} ({d}%)"
             },
             series: series
         };
