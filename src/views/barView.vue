@@ -1,15 +1,22 @@
 <template>
     <div class="barView">
-        <h4>直接使用</h4>
-        <!-- <div id="barNormal" class="inner" style="width:80%;height:500px;"></div>
-        <div id="barWithLine" class="inner" style="width:80%;height:500px;"></div>
-        <div id="barPer" class="inner" style="width:80%;height:500px;"></div>
-        <div id="barDynamic" class="inner" style="width:80%;height:500px;"></div> -->
+        <chart-item :data="barData02" title="101柱状图普通" chartId="bar01" :chartType="101"></chart-item>
 
-        <h4>使用组件</h4>
-        <chart-item :data="barNormalData" chartId=""></chart-item>
-        <chart-item :data="barWithLineData" chartId="组件02"></chart-item>
+        <chart-item :data="barData02" title="102柱状图+增长率" chartId="bar02" :chartType="102"></chart-item>
 
+        <!-- <chart-item :data="barData03" title="103柱状图+折线图" chartId="bar03" :chartType="103"></chart-item> -->
+
+        <chart-item :data="barData01" title="104柱状图普通(含平均值线)" chartId="bar04" :chartType="104"></chart-item>
+
+        <chart-item :data="barData02" title="105柱状图百分比(相同xdata和为100%, 堆叠)" chartId="bar05" :chartType="105"></chart-item>
+
+        <chart-item :data="barData02" title="106柱状图百分比(相同xdata和为100%)" chartId="bar06" :chartType="106"></chart-item>
+
+        <chart-item :data="barData02" title="107柱状图百分比(相同ydata,即相同颜色和为100%)" chartId="bar07" :chartType="107"></chart-item>
+
+        <chart-item :data="barData04" title="113柱状图动态求和" chartId="bar08" :chartType="113"></chart-item>
+
+        <chart-item :data="barData03" title="x轴单位不为“年”或“月”，自动出现滚动条" chartId="bar09" :chartType="106"></chart-item>
     </div>
 </template>
 
@@ -21,8 +28,10 @@
         name: "barView",
         data (){
             return{
-                barNormalData: {},
-                barWithLineData: {},
+                barData01: {},
+                barData02: {},
+                barData03: {},
+                barData04: {},
                 chartConfig:{
                     "ifTitle": true,
                     "ifDataZoom": true,
@@ -39,13 +48,23 @@
         },
         mounted(){
             //普通柱状图
-            this.$dataGet("/barData01.json", (data)=>{
-                data.title = "普通柱状图101";
-                this.barNormalData = data;
+            this.$dataGet("http://47.98.205.88:3000/api/barData.json", (data)=>{
+                this.barData01 = data[0];
+                this.barData02 = data[1];
+                this.barData03 = JSON.parse(JSON.stringify(data[1]));
+                this.barData03.xunit = "月份";
 
-                //直接绘制
-                var chart = new SuCharts(data, "barNormal", 101);
-                chart.drawChart(this.chartConfig); 
+                // //直接绘制
+                // var chart = new SuCharts(data, "barNormal", 101);
+                // chart.drawChart(this.chartConfig); 
+            });
+            //普通柱状图
+            this.$dataGet("http://47.98.205.88:3000/api/barData02.json", (data)=>{
+                this.barData04 = data[0];
+
+                // //直接绘制
+                // var chart = new SuCharts(data, "barNormal", 101);
+                // chart.drawChart(this.chartConfig); 
             });
             // //柱状图+增长率
             // dataGet("barWithLine", (data)=>{

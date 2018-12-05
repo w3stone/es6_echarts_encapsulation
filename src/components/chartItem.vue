@@ -13,21 +13,21 @@
                 <p v-show="false">{{ JSON.stringify(option) }}</p>
 
                 <div class="no_data center" v-show="f_chartData.length==0">
-                    <img src="../assets/img/noData.png" />
+                    <img src="https://suvalue.oss-cn-hangzhou.aliyuncs.com/bigdata/noData.png'" />
                 </div>
             </div>
         </div>
 
         <!--表格-->
-        <!-- <div class="table_panel" v-show="f_tableShow">
+        <div class="table_panel" v-show="f_tableShow">
             <table-item :tableList="tableList"></table-item>
-        </div> -->
+        </div>
     </div>
 </template>
 
 <script>
     import {mapState, mapMutations} from 'vuex'
-    // import tableItem from './tableItem'
+    import tableItem from './tableItem'
     import {SuCharts} from '@/assets/scripts/charts/suCharts.js'
     import {makeBarTable, make2DTable, make4DTable} from '@/assets/scripts/charts/tools/tableFn.js'
     
@@ -56,9 +56,9 @@
             }
         },
         computed:{
-            level3Id(){ //三级菜单id
-                return this.$route.query.chartId;
-            },
+            ...mapState({
+                //"imgDomain": state=>state.imgDomain
+            }),
             dataString(){ //用于watch(Immediate为false)默认
                 if(this.immediate==false || this.immediate==undefined){
                     return JSON.stringify(this.data);
@@ -85,7 +85,7 @@
 
             f_chartType(){ return this.chartType || this.data.charttype || 0 },
             
-            f_tableShow(){ return this.showtable; },
+            f_tableShow(){ console.log(this.showtable); return this.showtable; },
             
             //最终图片绝对路径
             f_iconURL(){
@@ -122,10 +122,10 @@
             //绘制图表
             drawChart(){
                 if($("#"+ this.f_chartId).length>0){
+
                     let suCharts = new SuCharts(this.data, this.f_chartId, parseInt(this.f_chartType));
-                    
-                    this.option = suCharts.setOption(this.config);
                     this.tableData = suCharts.chartObj;
+                    this.option = suCharts.setOption(this.config);
 
                     let echart = echarts.init(document.getElementById(this.f_chartId), "macarons"); //初始化echarts实例
 
@@ -150,7 +150,7 @@
                         //console.log("oldVal", oldVal);
                         //console.log( JSON.stringify(this.option) );
                         this.drawChart(this.config);
-                        this.tableList = this.makeTableList(); //给tableList附上数据
+                        //this.tableList = this.makeTableList(); //给tableList附上数据
                         //console.log(this.tableList);
                     }) 
                 }
@@ -164,11 +164,14 @@
                         // console.log("oldVal", oldVal);
                         // console.log( JSON.stringify(this.option) );
                         this.drawChart(this.config);
-                        this.tableList = this.makeTableList(); //给tableList附上数据
+                        //this.tableList = this.makeTableList(); //给tableList附上数据
                         //console.log(this.tableList);
                     }) 
                 }
             },
+        },
+        components:{
+            tableItem
         }
 
 	}
