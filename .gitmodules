@@ -1,0 +1,3 @@
+[submodule "src/assets/scripts/charts"]
+	path = src/assets/scripts/charts
+	url = https://github.com/w3stone/charts.git
