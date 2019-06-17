@@ -7,13 +7,13 @@
                     <h3 class="title">{{f_title}}</h3>
                 </div>
                 <!--图表-->
-                <div class="chart_panel" :id="f_chartId"></div>
+                <div class="chart_panel" :id="f_chartId" :ref="f_chartId"></div>
                 
                 <!--控制台显示option-->
                 <p v-show="false">{{ JSON.stringify(option) }}</p>
 
                 <div class="no_data center" v-show="f_chartData.length==0">
-                    <img src="https://suvalue.oss-cn-hangzhou.aliyuncs.com/bigdata/noData.png'" />
+                    <img src="https://suvalue.oss-cn-hangzhou.aliyuncs.com/bigdata/noData.png" />
                 </div>
             </div>
         </div>
@@ -56,9 +56,6 @@
             }
         },
         computed:{
-            ...mapState({
-                //"imgDomain": state=>state.imgDomain
-            }),
             dataString(){ //用于watch(Immediate为false)默认
                 if(this.immediate==false || this.immediate==undefined){
                     return JSON.stringify(this.data);
@@ -85,7 +82,10 @@
 
             f_chartType(){ return this.chartType || this.data.charttype || 0 },
             
-            f_tableShow(){ console.log(this.showtable); return this.showtable; },
+            f_tableShow(){ 
+                console.log(this.showtable); 
+                return this.showtable; 
+            },
             
             //最终图片绝对路径
             f_iconURL(){
@@ -122,13 +122,12 @@
             },
             //绘制图表
             drawChart(){
-                if($("#"+ this.f_chartId).length>0){
-
+                if(this.$refs[this.f_chartId]){
                     let suCharts = new SuCharts(this.data, this.f_chartId, parseInt(this.f_chartType));
                     this.tableData = suCharts.chartObj;
                     this.option = suCharts.setOption(this.config);
 
-                    let echart = echarts.init(document.getElementById(this.f_chartId), "macarons"); //初始化echarts实例
+                    let echart = echarts.init(this.$refs[this.f_chartId], "macarons"); //初始化echarts实例
 
                     echart.clear(); //清空
                     echart.setOption(this.option);
