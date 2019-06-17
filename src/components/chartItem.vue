@@ -29,7 +29,7 @@
     import {mapState, mapMutations} from 'vuex'
     import tableItem from './tableItem'
     import {SuCharts} from '@/assets/scripts/charts/suCharts.js'
-    import {makeBarTable, make2DTable, make4DTable} from '@/assets/scripts/charts/tools/tableFn.js'
+    import {Table} from '@/assets/scripts/charts/tools/tableFn.js'
     
     export default {
         name: "chartItem",
@@ -108,15 +108,16 @@
                 }
 
                 let chartType = this.f_chartType;
+                let table = new Table(this.tableData);
+
                 if((chartType>=100 && chartType<=199) || (chartType>=300 && chartType<=399)){
-                    return makeBarTable(this.tableData);
+                    return table.make3DTable();
 
                 }else if(chartType>=400 && chartType<=499){
-                    return make4DTable(this.tableData);
+                    return table.make4DTable();
 
                 }else{
-                    return make2DTable(this.tableData);
-
+                    return table.make2DTable();
                 }
             },
             //绘制图表

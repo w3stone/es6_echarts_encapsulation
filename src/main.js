@@ -33,7 +33,7 @@ Vue.prototype.$dataGet = function(apiName, callback){
 
 /* eslint-disable no-new */
 new Vue({
-  el: '#app',
-  router,
-  render: h => h(App)
+    el: '#app',
+    router,
+    render: h => h(App)
 })
