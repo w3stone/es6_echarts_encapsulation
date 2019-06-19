@@ -73,7 +73,7 @@
 
             f_title(){
                 let title =  this.title || this.data.title || "";
-                return  title
+                return title;
             },
 
             f_chartId(){ return this.chartId || "" },
@@ -83,23 +83,23 @@
             f_chartType(){ return this.chartType || this.data.charttype || 0 },
             
             f_tableShow(){ 
-                console.log(this.showtable); 
+                //console.log(this.showtable); 
                 return this.showtable; 
             },
             
             //最终图片绝对路径
             f_iconURL(){
                 //console.log(this.data); 
-                let iconURL = this.iconURL || this.data.iconSource || "";
-                return iconURL? this.imgDomain +'/menu_icon' + iconURL: "";
+                let iconURL = this.iconURL || this.data.iconSource || '';
+                return iconURL? this.imgDomain +'/menu_icon' + iconURL: '';
             },
 
-            f_height(){ return this.height || 450 },
+            f_height(){ return this.height || 450 }
 
         },
         methods:{
             ...mapMutations({
-                changeChartDgVisible: "changeChartDgVisible",
+                changeChartDgVisible: 'changeChartDgVisible',
                 innerChartData: 'changeInnerChartData' //改变图表弹框数据
             }),
             makeTableList(){
@@ -138,7 +138,6 @@
                     });
                 } 
             }
-
         },
         watch:{
             dataString:{
@@ -185,6 +184,7 @@
         background-color: #fff;
         border: 1px solid #ededed;
         padding: 0 16px;
+        margin: 16px 0;
 
         .chart_inner{
             position: relative;
